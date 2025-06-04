@@ -4,6 +4,7 @@ const convertBtn = document.getElementById("convert-btn");
 const downloadLink = document.getElementById("download-link");
 const fileInfo = document.getElementById("file-info");
 const dropZone = document.getElementById("drop-zone");
+const formatWarning = document.getElementById("format-warning");
 
 let loadedImage = null;
 let loadedFile = null;
@@ -47,23 +48,55 @@ dropZone.addEventListener("drop", (e) => {
   handleFile(file);
 });
 
+formatSelect.addEventListener("change", () => {
+  const selected = formatSelect.value;
+  let message = "";
+
+  switch (selected) {
+    case "avif":
+      message = "⚠ AVIF is experimental and may not work in all browsers.";
+      break;
+    case "bmp":
+      message = "⚠ BMP is uncompressed and not suitable for web use.";
+      break;
+    default:
+      message = "";
+  }
+
+  if (message) {
+    formatWarning.classList.remove("hidden");
+    formatWarning.textContent = message;
+  } else {
+    formatWarning.classList.add("hidden");
+    formatWarning.textContent = "";
+  }
+});
+
 convertBtn.addEventListener("click", () => {
   if (!loadedImage || !loadedFile) {
     alert("Please upload an image first.");
     return;
   }
 
+  const format = formatSelect.value;
   const canvas = document.createElement("canvas");
   canvas.width = loadedImage.width;
   canvas.height = loadedImage.height;
   const ctx = canvas.getContext("2d");
   ctx.drawImage(loadedImage, 0, 0);
 
-  canvas.toBlob((blob) => {
-    const url = URL.createObjectURL(blob);
-    downloadLink.href = url;
-    downloadLink.download = `SFConverter.${formatSelect.value}`;
-    downloadLink.textContent = "Download converted image";
-    downloadLink.style.display = "block";
-  }, `image/${formatSelect.value}`);
+  canvas.toBlob((blobCheck) => {
+    if (!blobCheck) {
+      alert(`Sorry, your browser doesn't support export to ${format.toUpperCase()}. Try PNG or JPG.`);
+      return;
+    }
+
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      downloadLink.href = url;
+      downloadLink.download = `SFConverter.${format}`;
+      downloadLink.textContent = "Download converted image";
+      downloadLink.style.display = "block";
+    }, `image/${format}`);
+  }, `image/${format}`);
 });

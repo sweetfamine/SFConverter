@@ -80,3 +80,17 @@ footer {
   margin: 20px 0;
   color: #777;
 }
+
+.format-warning {
+  border: 1px solid #ffa500;
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.hidden {
+  display: none;
+}
