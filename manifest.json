@@ -7,9 +7,9 @@
   "action": {
     "default_title": "Open Converter",
     "default_icon": {
-      "16": "icons/arrow-up-down.png",
-      "48": "icons/arrow-up-down.png",
-      "128": "icons/arrow-up-down.png"
+      "16": "icons/arrow-up-down16.png",
+      "48": "icons/arrow-up-down48.png",
+      "128": "icons/arrow-up-down48.png"
     }
   },
   "background": {
