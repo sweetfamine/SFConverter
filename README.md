@@ -2,11 +2,12 @@
 Eine minimalistische, Chrome-Erweiterung zur lokalen Bildkonvertierung. have fun with it :D
 
 # Changlog
-Version 0.2     |   added Button to Confirm Conversion
-                |   shows meta data
-Version 0.3     |   added back the Drag & Drop menu
-                |   added signature
-Version 0.4     |	updated the ui
+Version 0.2     |   	added Button to Confirm Conversion
+                |   	shows meta data
+Version 0.3     |   	added back the Drag & Drop menu
+                |   	added signature
+Version 0.4     |	    updated the ui
+Version 0.5	    |   	added BMP & AVIF support & warnings
 
 
 # external Licenses
