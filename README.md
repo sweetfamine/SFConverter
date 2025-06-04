@@ -2,14 +2,14 @@
 Eine minimalistische, Chrome-Erweiterung zur lokalen Bildkonvertierung. have fun with it :D
 
 # Changlog
-Version 0.2 |   added Button to Confirm Conversion
-            |   shows meta data
-Version 0.3 |   added back the Drag & Drop menu
-            |   added signature
-Version 0.4 |	updated the ui
+Version 0.2     |   added Button to Confirm Conversion
+                |   shows meta data
+Version 0.3     |   added back the Drag & Drop menu
+                |   added signature
+Version 0.4     |	updated the ui
 
 
-# License
+# external Licenses
 Icon from Lucide under the ISC License
 
 Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT).
@@ -23,3 +23,9 @@ INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING
 FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, 
 NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE 
 USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+
+
+
+Made with 🍣 by Copyright (c) 2025 sweet.famine
