@@ -62,7 +62,7 @@ convertBtn.addEventListener("click", () => {
   canvas.toBlob((blob) => {
     const url = URL.createObjectURL(blob);
     downloadLink.href = url;
-    downloadLink.download = `converted.${formatSelect.value}`;
+    downloadLink.download = `SFConverter.${formatSelect.value}`;
     downloadLink.textContent = "Download converted image";
     downloadLink.style.display = "block";
   }, `image/${formatSelect.value}`);
