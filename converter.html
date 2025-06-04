@@ -2,31 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sweet Famine Converter</title>
+  <title>SFConverter</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Select Image to Convert</h2>
+  <div class="container">
+    <h1>SFConverter</h1>
+    <p class="subtitle">Elegant & simple image format conversion</p>
 
-  <input type="file" id="file-input" accept="image/*">
-  <div id="drop-zone">Or drag & drop an image here</div>
-  <div id="file-info"></div>
+    <input type="file" id="file-input" accept="image/*">
+    <div id="drop-zone">or drag & drop your image here</div>
+    <div id="file-info"></div>
 
-  <label for="format">Convert to:</label>
-  <select id="format">
-    <option value="png">PNG</option>
-    <option value="jpeg">JPG</option>
-    <option value="webp">WebP</option>
-  </select>
+    <label for="format">Convert to:</label>
+    <select id="format">
+      <option value="png">PNG</option>
+      <option value="jpeg">JPG</option>
+      <option value="webp">WebP</option>
+    </select>
 
-  <!-- downloadlink anzeigen -->
-  <button id="convert-btn">Convert Image</button>
+    <button id="convert-btn">Convert Image</button>
+    <a id="download-link" style="display:none;" download>Download converted image</a>
+  </div>
 
-  <a id="download-link" style="display:none;" download>Download converted image</a>
-
-  <!-- external script, cause chrome wants it so -->
-  <footer style="margin-top: 40px; font-size: 12px; color: #888;">
-    Made by sweet.Famine
+  <footer>
+    Made with 🍣 by <strong>sweet.famine</strong>
+    <br>
+    @Juni 2025
   </footer>
 
   <script src="converter.js"></script>
