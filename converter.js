@@ -3,12 +3,12 @@ const formatSelect = document.getElementById("format");
 const convertBtn = document.getElementById("convert-btn");
 const downloadLink = document.getElementById("download-link");
 const fileInfo = document.getElementById("file-info");
+const dropZone = document.getElementById("drop-zone");
 
 let loadedImage = null;
 let loadedFile = null;
 
-fileInput.addEventListener("change", (e) => {
-  const file = e.target.files[0];
+function handleFile(file) {
   if (!file || !file.type.startsWith("image/")) {
     alert("Only image files are supported.");
     return;
@@ -25,6 +25,26 @@ fileInput.addEventListener("change", (e) => {
     img.src = reader.result;
   };
   reader.readAsDataURL(file);
+}
+
+fileInput.addEventListener("change", (e) => {
+  handleFile(e.target.files[0]);
+});
+
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropZone.style.backgroundColor = "#e0f7fa";
+});
+
+dropZone.addEventListener("dragleave", () => {
+  dropZone.style.backgroundColor = "#f8f8f8";
+});
+
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropZone.style.backgroundColor = "#f8f8f8";
+  const file = e.dataTransfer.files[0];
+  handleFile(file);
 });
 
 convertBtn.addEventListener("click", () => {

@@ -7,6 +7,15 @@ body {
 #file-info {
   margin-top: 10px;
   font-size: 14px;
+  white-space: pre-wrap;
+}
+
+#drop-zone {
+  border: 2px dashed #aaa;
+  padding: 20px;
+  margin: 20px;
+  background-color: #f8f8f8;
+  cursor: pointer;
 }
 
 #download-link {
