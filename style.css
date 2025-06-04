@@ -104,3 +104,9 @@ footer {
   vertical-align: middle;
   margin: 0 5px;
 }
+
+#quality-val {
+  display: inline-block;
+  min-width: 2.2em;
+  text-align: right;
+}
