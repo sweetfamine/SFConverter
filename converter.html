@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Image Converter</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #drop-zone {
+      border: 2px dashed #aaa;
+      padding: 40px;
+      margin: 20px auto;
+      background-color: #f8f8f8;
+      width: 300px;
+    }
+    #download-link {
+      display: block;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Drag & Drop Image</h2>
+  <div id="drop-zone">Drop image file here</div>
+
+  <label for="format">Convert to: </label>
+  <select id="format">
+    <option value="png">PNG</option>
+    <option value="jpeg">JPG</option>
+    <option value="webp">WebP</option>
+  </select>
+
+  <!-- downloadlink anzeigen -->
+  <a id="download-link" download style="display:none;">Download converted image</a>
+
+  <!-- external script, cause chrome wants it so -->
+  <script src="converter.js"></script>
+</body>
+</html>
