@@ -6,6 +6,8 @@ Version 0.2 |   added Button to Confirm Conversion
             |   shows meta data
 Version 0.3 |   added back the Drag & Drop menu
             |   added signature
+Version 0.4 |	updated the ui
+
 
 # License
 Icon from Lucide under the ISC License
