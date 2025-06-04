@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SFConverter",
-  "version": "0.3",
+  "version": "0.4",
   "description": "Convert PNG, JPG and WebP via drag & drop.",
   "permissions": ["tabs"],
   "action": {
