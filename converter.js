@@ -5,9 +5,15 @@ const downloadLink = document.getElementById("download-link");
 const fileInfo = document.getElementById("file-info");
 const dropZone = document.getElementById("drop-zone");
 const formatWarning = document.getElementById("format-warning");
+const qualityInput = document.getElementById("quality");
+const qualityVal = document.getElementById("quality-val");
 
 let loadedImage = null;
 let loadedFile = null;
+
+qualityInput.addEventListener("input", () => {
+  qualityVal.textContent = qualityInput.value;
+});
 
 function handleFile(file) {
   if (!file || !file.type.startsWith("image/")) {
@@ -79,24 +85,25 @@ convertBtn.addEventListener("click", () => {
   }
 
   const format = formatSelect.value;
+  const quality = parseFloat(qualityInput.value);
+  const qualityFormats = ["jpeg", "webp", "avif"];
+
   const canvas = document.createElement("canvas");
   canvas.width = loadedImage.width;
   canvas.height = loadedImage.height;
   const ctx = canvas.getContext("2d");
   ctx.drawImage(loadedImage, 0, 0);
 
-  canvas.toBlob((blobCheck) => {
-    if (!blobCheck) {
+  canvas.toBlob((blob) => {
+    if (!blob) {
       alert(`Sorry, your browser doesn't support export to ${format.toUpperCase()}. Try PNG or JPG.`);
       return;
     }
 
-    canvas.toBlob((blob) => {
-      const url = URL.createObjectURL(blob);
-      downloadLink.href = url;
-      downloadLink.download = `SFConverter.${format}`;
-      downloadLink.textContent = "Download converted image";
-      downloadLink.style.display = "block";
-    }, `image/${format}`);
-  }, `image/${format}`);
+    const url = URL.createObjectURL(blob);
+    downloadLink.href = url;
+    downloadLink.download = `SFConverter.${format}`;
+    downloadLink.textContent = "Download converted image";
+    downloadLink.style.display = "block";
+  }, `image/${format}`, qualityFormats.includes(format) ? quality : undefined);
 });

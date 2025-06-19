@@ -8,6 +8,7 @@ Version 0.3     |   	added back the Drag & Drop menu
                 |   	added signature
 Version 0.4     |	    updated the ui
 Version 0.5	    |   	added BMP & AVIF support & warnings
+Version 0.6     |       added quality control slider
 
 
 # external Licenses

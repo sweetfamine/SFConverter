@@ -94,3 +94,19 @@ footer {
 .hidden {
   display: none;
 }
+
+#quality-control {
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+#quality {
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+#quality-val {
+  display: inline-block;
+  min-width: 2.2em;
+  text-align: right;
+}
