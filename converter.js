@@ -11,7 +11,6 @@ const qualityVal = document.getElementById("quality-val");
 let loadedImage = null;
 let loadedFile = null;
 
-// Show current quality value live
 qualityInput.addEventListener("input", () => {
   qualityVal.textContent = qualityInput.value;
 });
@@ -35,12 +34,10 @@ function handleFile(file) {
   reader.readAsDataURL(file);
 }
 
-// Input via file selector
 fileInput.addEventListener("change", (e) => {
   handleFile(e.target.files[0]);
 });
 
-// Drag & Drop
 dropZone.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropZone.style.backgroundColor = "#e0f7fa";
@@ -57,7 +54,6 @@ dropZone.addEventListener("drop", (e) => {
   handleFile(file);
 });
 
-// Format-specific warnings
 formatSelect.addEventListener("change", () => {
   const selected = formatSelect.value;
   let message = "";
@@ -82,7 +78,6 @@ formatSelect.addEventListener("change", () => {
   }
 });
 
-// Conversion process
 convertBtn.addEventListener("click", () => {
   if (!loadedImage || !loadedFile) {
     alert("Please upload an image first.");
