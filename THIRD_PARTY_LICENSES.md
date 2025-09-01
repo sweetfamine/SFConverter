@@ -16,4 +16,4 @@ This project includes the following third-party components:
 
 - Project: [Lucide](https://lucide.dev)
 - License: ISC (main project) + MIT (for portions derived from Feather)  
-- Full text: see `LICENSES/Lucide-LICENSE.txt`
+- Full text: see `LICENSES/Lucide-LICENSE.txt` or <https://lucide.dev/license>
