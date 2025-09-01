@@ -183,14 +183,39 @@ convertBtn.addEventListener("click", async () => {
 
       // Pro Datei Download Link
       // per-file Download link
-      const a = document.createElement("a");
       const base = file.name.replace(/\.[^.]+$/, "");
+
+      // Eingabefeld für den Dateinamen
+      // Input field for custom filename
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = base;
+      input.className = "filename-input";
+
+      // Download-Link
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `${base}.${format}`;
+
+      // Standard: alter Name + _SFConverter
+      // Default: old name + _SFConverter
+      a.download = `${base}_SFConverter.${format}`;
       a.textContent = `Download (${prettyBytes(blob.size)}, ${width}×${height})`;
+
+      // Falls der Nutzer den Namen ändert Download-Name aktualisieren
+      // Update download name if user changes input
+      input.addEventListener("input", () => {
+        const entered = input.value.trim();
+        if (entered) {
+          a.download = `${entered}.${format}`;
+        } else {
+          a.download = `${base}_SFConverter.${format}`;
+        }
+      });
 
       const meta = li.querySelector(".meta");
       meta.textContent = "";
+      li.appendChild(input);
+      li.appendChild(document.createElement("br"));
       li.appendChild(a);
 
     } catch (err) {

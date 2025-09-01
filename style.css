@@ -117,3 +117,10 @@ footer {
 .results .meta { color:#666; font-size:12px; }
 .results .err { color:#b00020; font-size:13px; }
 .results a { text-decoration:none; }
+
+.filename-input {
+  margin: 5px 0;
+  padding: 4px 6px;
+  font-size: 0.9em;
+  width: 80%;
+}
