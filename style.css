@@ -1,3 +1,4 @@
+/* Basis */
 body {
   margin: 0;
   padding: 0;
@@ -6,16 +7,18 @@ body {
   color: #333;
 }
 
+/* Container */
 .container {
   max-width: 400px;
   margin: 50px auto;
-  background: white;
+  background: #fff;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   padding: 30px;
   text-align: center;
 }
 
+/* Headings */
 h1 {
   margin-bottom: 0;
 }
@@ -26,20 +29,21 @@ h1 {
   color: #666;
 }
 
+/* File Input & Drop Zone */
 #file-input {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin: 20px 0 10px;
 }
 
 #drop-zone {
   border: 2px dashed #aaa;
   padding: 20px;
   margin: 10px 0;
-  background-color: #f9f9f9;
+  background: #f9f9f9;
   cursor: pointer;
   border-radius: 8px;
 }
 
+/* File Info */
 #file-info {
   font-size: 14px;
   white-space: pre-wrap;
@@ -47,7 +51,9 @@ h1 {
   color: #444;
 }
 
-#format, #convert-btn {
+/* Select + Button */
+#format,
+#convert-btn {
   margin-top: 10px;
   padding: 8px;
   border-radius: 6px;
@@ -56,16 +62,17 @@ h1 {
 }
 
 #convert-btn {
-  background-color: #ff6f61;
-  color: white;
+  background: #ff6f61;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 #convert-btn:hover {
-  background-color: #e0574f;
+  background: #e0574f;
 }
 
+/* Download Link */
 #download-link {
   display: block;
   margin-top: 20px;
@@ -74,6 +81,7 @@ h1 {
   font-weight: bold;
 }
 
+/* Footer */
 footer {
   text-align: center;
   font-size: 12px;
@@ -81,9 +89,10 @@ footer {
   color: #777;
 }
 
+/* Warnings */
 .format-warning {
   border: 1px solid #ffa500;
-  background-color: #fff3cd;
+  background: #fff3cd;
   color: #856404;
   padding: 10px;
   border-radius: 6px;
@@ -91,10 +100,12 @@ footer {
   font-size: 0.9rem;
 }
 
+/* Utility */
 .hidden {
   display: none;
 }
 
+/* Quality Control */
 #quality-control {
   margin-top: 15px;
   font-size: 0.95rem;
@@ -111,26 +122,48 @@ footer {
   text-align: right;
 }
 
-.results { list-style: none; padding: 0; margin-top: 16px; text-align: left; }
-.results li { background:#fafafa; border:1px solid #eee; border-radius:8px; padding:10px; margin:8px 0; }
-.results .name { font-weight:600; }
-.results .meta { color:#666; font-size:12px; }
-.results .err { color:#b00020; font-size:13px; }
-.results a { text-decoration:none; }
-
-.filename-input {
-  margin: 5px 0;
-  padding: 4px 6px;
-  font-size: 0.9em;
-  width: 80%;
+/* Results */
+.results {
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
+  text-align: left;
 }
 
+.results li {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.results .name {
+  font-weight: 600;
+}
+
+.results .meta {
+  color: #666;
+  font-size: 12px;
+}
+
+.results .err {
+  color: #b00020;
+  font-size: 13px;
+}
+
+.results a {
+  text-decoration: none;
+}
+
+/* File List */
 .files {
   list-style: none;
   padding: 0;
   margin: 12px 0 6px;
   text-align: left;
 }
+
 .file-item {
   background: #fff;
   border: 1px solid #eee;
@@ -143,14 +176,17 @@ footer {
   gap: 8px 12px;
   align-items: center;
 }
+
 .file-item .name {
   font-weight: 600;
   font-size: 0.95rem;
 }
+
 .file-item .meta {
   color: #666;
   font-size: 12px;
 }
+
 .file-item .remove-btn {
   appearance: none;
   border: none;
@@ -164,9 +200,14 @@ footer {
   font-weight: 700;
   transition: transform .08s ease, background-color .15s ease;
 }
-.file-item .remove-btn:hover { background: #ffd5ad; transform: translateY(-1px); }
 
-filename-input {
+.file-item .remove-btn:hover {
+  background: #ffd5ad;
+  transform: translateY(-1px);
+}
+
+/* Filename Input */
+.filename-input {
   width: 100%;
   max-width: 320px;
   margin: 6px 0 8px;
@@ -179,6 +220,8 @@ filename-input {
   outline: none;
   transition: box-shadow .15s ease, border-color .15s ease;
 }
+
 .filename-input:focus {
   border-color: #ff6f61;
   box-shadow: 0 4px 18px rgba(255, 111, 97, 0.25);
+}
