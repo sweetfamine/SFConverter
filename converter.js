@@ -2,20 +2,94 @@ const fileInput = document.getElementById("file-input");
 const formatSelect = document.getElementById("format");
 const convertBtn = document.getElementById("convert-btn");
 const downloadLink = document.getElementById("download-link");
-const fileInfo = document.getElementById("file-info");
 const dropZone = document.getElementById("drop-zone");
 const formatWarning = document.getElementById("format-warning");
 const qualityInput = document.getElementById("quality");
 const qualityVal = document.getElementById("quality-val");
 const resultsList = document.getElementById("results");
+const filesList = document.getElementById("files");
 
 let selectedFiles = [];
+const nameOverrides = new Map();
 
 // Quality slider logik
 // Initial quality display
 qualityInput.addEventListener("input", () => {
   qualityVal.textContent = qualityInput.value;
 });
+
+// Erzeuge stabilen Schlüssel pro Datei (zum Entfernen)
+// Create a stable key for each File (used for remove)
+function fileKey(file) {
+  return `${file.name}|${file.size}|${file.lastModified}`;
+}
+
+// Render die ausgewählten Dateien als Karten mit Entfernen-Button
+// Render selected files as cards with a remove (X) button
+function renderSelectedFiles() {
+  filesList.innerHTML = "";
+  const keys = selectedFiles.map(fileKey);
+
+  selectedFiles.forEach((file, idx) => {
+    const li = document.createElement("li");
+    li.className = "file-item";
+
+    // Lade Infomationen
+    // Load Infomations
+    const left = document.createElement("div");
+    const title = document.createElement("div");
+    title.className = "name";
+    title.textContent = file.name;
+
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = `${prettyBytes(file.size)} · ${file.type}`;
+    left.appendChild(title);
+    left.appendChild(meta);
+
+    // Eingabefeld für den Dateinamen (vor dem Konvertieren!)
+    // Input field for custom base filename (before converting!)
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "filename-input";
+    input.placeholder = "optional custom name";
+
+    const k = keys[idx];
+    input.value = nameOverrides.get(k) ?? "";
+
+    // Änderung merken
+    input.addEventListener("input", () => {
+      const v = input.value.trim();
+      if (v) nameOverrides.set(k, v);
+      else nameOverrides.delete(k);
+    });
+
+    // Remove button (X)
+    const remove = document.createElement("button");
+    remove.className = "remove-btn";
+    remove.setAttribute("aria-label", `Remove ${file.name}`);
+    remove.textContent = "X";
+    remove.addEventListener("click", () => {
+      const key = keys[idx];
+      selectedFiles = selectedFiles.filter(f => fileKey(f) !== key);
+      nameOverrides.delete(key);
+      renderSelectedFiles();
+      resultsList.innerHTML = "";
+      downloadLink.style.display = "none";
+    });
+
+    li.appendChild(left);
+    li.appendChild(input);
+    li.appendChild(remove);
+    filesList.appendChild(li);
+
+    // Dimensionen asynchron nachladen und Metazeile aktualisieren
+    // Load dimensions asynchronously and update meta line
+    loadImageFromFile(file).then(img => {
+      meta.textContent = `${prettyBytes(file.size)} · ${file.type} · ${img.width}×${img.height}`;
+    }).catch(() => {/* ignore */});
+  });
+}
 
 // Funktion die Bytes in KB, MB, GB umwandelt
 // Function to convert bytes to KB, MB, GB
@@ -89,25 +163,15 @@ function handleFiles(fileList) {
     alert("Only image files are supported.");
     return;
   }
+
   selectedFiles = files;
-
-  // Anzeige der Dateiinformationen
-  // Display file information
-  if (files.length === 1) {
-    fileInfo.innerText = `File: ${files[0].name}\nType: ${files[0].type}\nSize: ${prettyBytes(files[0].size)}`;
-  } else {
-    const total = files.reduce((s, f) => s + f.size, 0);
-    fileInfo.innerText = `${files.length} files selected (${prettyBytes(total)})`;
-  }
-
-  // Lösche alte Ergebnisse und Einzel-Links
-  // reset old results + single-link
   resultsList.innerHTML = "";
   downloadLink.style.display = "none";
+  renderSelectedFiles();
 }
 
-// -- Event Listeners für UI Elemente --
-// -- Event listeners for UI elements --
+// Event Listeners für UI Elemente
+// Event listeners for UI elements
 fileInput.addEventListener("change", (e) => handleFiles(e.target.files));
 
 dropZone.addEventListener("dragover", (e) => {
@@ -159,7 +223,7 @@ convertBtn.addEventListener("click", async () => {
   const quality = parseFloat(qualityInput.value);
 
   // Check ob das Format unterstützt wird
-  // quick capability check
+  // capability check
   const ok = await canEncode(`image/${format}`);
   if (!ok) {
     alert(`Your browser cannot encode ${format.toUpperCase()}. Try PNG or JPEG.`);
@@ -187,40 +251,28 @@ convertBtn.addEventListener("click", async () => {
 
       // Eingabefeld für den Dateinamen
       // Input field for custom filename
-      const input = document.createElement("input");
-      input.type = "text";
-      input.value = base;
-      input.className = "filename-input";
 
       // Download-Link
       const a = document.createElement("a");
       a.href = url;
 
       // Standard: alter Name + _SFConverter
-      // Default: old name + _SFConverter
-      a.download = `${base}_SFConverter.${format}`;
-      a.textContent = `Download (${prettyBytes(blob.size)}, ${width}×${height})`;
+      const key = fileKey(file);
+      const entered = (nameOverrides.get(key) || "").trim();
+      const finalBase = entered ? entered : `${base}_SFConverter`;
+      a.download = `${finalBase}.${format}`;
+      a.textContent = "⬇ Download";
 
-      // Falls der Nutzer den Namen ändert Download-Name aktualisieren
-      // Update download name if user changes input
-      input.addEventListener("input", () => {
-        const entered = input.value.trim();
-        if (entered) {
-          a.download = `${entered}.${format}`;
-        } else {
-          a.download = `${base}_SFConverter.${format}`;
-        }
-      });
+      // Falls der Nutzer den Namen ändert → Download-Name aktualisieren
 
       const meta = li.querySelector(".meta");
       meta.textContent = "";
-      li.appendChild(input);
-      li.appendChild(document.createElement("br"));
       li.appendChild(a);
 
     } catch (err) {
       const meta = li.querySelector(".meta");
       meta.innerHTML = `<span class="err">❌ ${err.message}</span>`;
     }
+
   }
 });

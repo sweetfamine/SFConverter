@@ -124,3 +124,61 @@ footer {
   font-size: 0.9em;
   width: 80%;
 }
+
+.files {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 6px;
+  text-align: left;
+}
+.file-item {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  padding: 10px 12px;
+  margin: 8px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 12px;
+  align-items: center;
+}
+.file-item .name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.file-item .meta {
+  color: #666;
+  font-size: 12px;
+}
+.file-item .remove-btn {
+  appearance: none;
+  border: none;
+  background: #ffe7d1;
+  border-radius: 999px;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform .08s ease, background-color .15s ease;
+}
+.file-item .remove-btn:hover { background: #ffd5ad; transform: translateY(-1px); }
+
+filename-input {
+  width: 100%;
+  max-width: 320px;
+  margin: 6px 0 8px;
+  padding: 8px 10px;
+  border: 1px solid #e8d9e6;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(252, 227, 236, 0.35);
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+.filename-input:focus {
+  border-color: #ff6f61;
+  box-shadow: 0 4px 18px rgba(255, 111, 97, 0.25);
