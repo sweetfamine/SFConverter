@@ -11,10 +11,14 @@ const qualityVal = document.getElementById("quality-val");
 let loadedImage = null;
 let loadedFile = null;
 
+// Qualitätseinstellung anzeigen
+// Initial quality display
 qualityInput.addEventListener("input", () => {
   qualityVal.textContent = qualityInput.value;
 });
 
+// Einlesen der Datei und Anzeigen der Informationen
+// Read the file and display its information
 function handleFile(file) {
   if (!file || !file.type.startsWith("image/")) {
     alert("Only image files are supported.");
@@ -34,19 +38,27 @@ function handleFile(file) {
   reader.readAsDataURL(file);
 }
 
+// Event listener für Datei-Input und Drag & Drop
+// Event listeners for file input and drag & drop
 fileInput.addEventListener("change", (e) => {
   handleFile(e.target.files[0]);
 });
 
+// Event listener für dragover
+// Event listener for dragover
 dropZone.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropZone.style.backgroundColor = "#e0f7fa";
 });
 
+// Event listener für dragleave
+// Event listener for dragleave
 dropZone.addEventListener("dragleave", () => {
   dropZone.style.backgroundColor = "#f8f8f8";
 });
 
+// Event listener für drop
+// Event listener for drop
 dropZone.addEventListener("drop", (e) => {
   e.preventDefault();
   dropZone.style.backgroundColor = "#f8f8f8";
@@ -54,6 +66,8 @@ dropZone.addEventListener("drop", (e) => {
   handleFile(file);
 });
 
+// Auswahl des Formats und ggf. Warnung anzeigen
+// Format selection and show warning if necessary
 formatSelect.addEventListener("change", () => {
   const selected = formatSelect.value;
   let message = "";
@@ -78,6 +92,8 @@ formatSelect.addEventListener("change", () => {
   }
 });
 
+// Bild konvertieren und Download-Link erstellen
+// Convert image and create download link
 convertBtn.addEventListener("click", () => {
   if (!loadedImage || !loadedFile) {
     alert("Please upload an image first.");
