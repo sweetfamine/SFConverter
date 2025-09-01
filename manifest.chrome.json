@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "SFConverter",
+  "version": "0.7",
+  "description": "Convert PNG, JPG, WebP, AVIF and BMP via drag & drop.",
+  "permissions": ["tabs"],
+  "action": { "default_title": "Open Converter",
+    "default_icon": { "16": "icons/arrow-up-down16.png",
+                      "48": "icons/arrow-up-down48.png",
+                      "128": "icons/arrow-up-down48.png" } },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}
