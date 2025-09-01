@@ -168,10 +168,6 @@ convertBtn.addEventListener("click", async () => {
 
   resultsList.innerHTML = "";
 
-  // Einzel Datei Download
-  // Single File Download
-  const useSingleLink = selectedFiles.length === 1;
-
   for (const file of selectedFiles) {
     
     const li = document.createElement("li");
@@ -197,12 +193,6 @@ convertBtn.addEventListener("click", async () => {
       meta.textContent = "";
       li.appendChild(a);
 
-      if (useSingleLink) {
-        downloadLink.href = url;
-        downloadLink.download = `${base}.${format}`;
-        downloadLink.textContent = "Download converted image";
-        downloadLink.style.display = "block";
-      }
     } catch (err) {
       const meta = li.querySelector(".meta");
       meta.innerHTML = `<span class="err">❌ ${err.message}</span>`;
