@@ -12,7 +12,6 @@ Version 0.4     |	    updated the ui
 Version 0.5	    |   	added BMP & AVIF support & warnings
 Version 0.6     |       added quality control slider
 Version 0.7     |       added Firefox Support via polyfill
-                |       added File name change possible
 
 ---
 

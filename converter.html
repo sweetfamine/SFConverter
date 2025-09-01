@@ -10,7 +10,7 @@
     <h1>SFConverter</h1>
     <p class="subtitle">Elegant & simple image format conversion</p>
 
-    <input type="file" id="file-input" accept="image/*">
+    <input type="file" id="file-input" accept="image/*" multiple>
     <div id="drop-zone">or drag & drop your image here</div>
     <div id="file-info"></div>
 
@@ -33,6 +33,7 @@
 
     <button id="convert-btn">Convert Image</button>
     <a id="download-link" style="display:none;" download>Download converted image</a>
+    <ul id="results" class="results"></ul>
   </div>
 
   <footer>
@@ -41,8 +42,6 @@
     Copyright (c) 2025 <strong>sweet.famine</strong>
   </footer>
 
-  
-  
   <!-- cause Chrome needs this -->
   <script src="converter.js"></script>
 </body>

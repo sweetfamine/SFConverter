@@ -110,3 +110,10 @@ footer {
   min-width: 2.2em;
   text-align: right;
 }
+
+.results { list-style: none; padding: 0; margin-top: 16px; text-align: left; }
+.results li { background:#fafafa; border:1px solid #eee; border-radius:8px; padding:10px; margin:8px 0; }
+.results .name { font-weight:600; }
+.results .meta { color:#666; font-size:12px; }
+.results .err { color:#b00020; font-size:13px; }
+.results a { text-decoration:none; }
