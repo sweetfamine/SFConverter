@@ -3,23 +3,22 @@ SFConverter is a simple and elegant browser extension for converting images
 (PNG, JPEG, WebP, AVIF, BMP) via drag & drop.  
 Works in both Chrome and Firefox.
 
-# Changlog
-Version 0.2     |   	added Button to Confirm Conversion
-                |   	shows meta data
-Version 0.3     |   	added back the Drag & Drop menu
-                |   	added signature
-Version 0.4     |	    updated the ui
-Version 0.5	    |   	added BMP & AVIF support & warnings
-Version 0.6     |       added quality control slider
-Version 0.7     |       added Firefox Support via polyfill
-
----
-
-## ✨ Features
-- Drag & drop or file input
-- Convert between PNG, JPEG, WebP, BMP, and AVIF
-- Adjustable quality (for formats supporting it)
+# Changlog    
+## Version 1.0
+### Features
+- Confirm Conversion button – verify before processing
+- File metadata display – view details about your files
+- Drag & Drop menu – quick and easy file upload
+- Digital signature – adds authenticity and trust
+- Quality control slider – adjust output quality
 - Clean and minimal UI
+
+### Format Support
+- PNG, JPG, WebP, BMP & AVIF
+- warnings for unsupported/experimental cases
+
+### Compatibility
+- supports chromium and firefox (min ver. 109.0) based browsers
 
 ---
 
@@ -58,5 +57,4 @@ See [LICENSE] for details.
 
 ---
 
-## 👤 Author
 Made with 🍣 by Copyright (c) 2025 sweet.famine

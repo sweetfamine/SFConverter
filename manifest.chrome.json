@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SFConverter",
-  "version": "0.7",
+  "version": "1.0",
   "description": "Convert PNG, JPG, WebP, AVIF and BMP via drag & drop.",
   "permissions": ["tabs"],
   "action": {
