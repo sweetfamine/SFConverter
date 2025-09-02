@@ -256,10 +256,20 @@ convertBtn.addEventListener("click", async () => {
 
   for (const file of selectedFiles) {
   const li = document.createElement("li");
-  li.innerHTML = `
-    <div class="name">${file.name}</div>
-    <div class="meta">Converting to <strong>${format.toUpperCase()}</strong>…</div>
-  `;
+
+  const nameDiv = document.createElement("div");
+  nameDiv.className = "name";
+  nameDiv.textContent = file.name;
+
+  const metaDiv = document.createElement("div");
+  metaDiv.className = "meta";
+
+  const strong = document.createElement("strong");
+  strong.textContent = format.toUpperCase();
+  metaDiv.append("Converting to ", strong, "…");
+
+  li.appendChild(nameDiv);
+  li.appendChild(metaDiv);
   resultsList.appendChild(li);
 
   try {
@@ -289,7 +299,11 @@ convertBtn.addEventListener("click", async () => {
 
   } catch (err) {
     const meta = li.querySelector(".meta");
-    meta.innerHTML = `<span class="err">❌ ${err.message}</span>`;
+    meta.textContent = "";
+    const errSpan = document.createElement("span");
+    errSpan.className = "err";
+    errSpan.textContent = `❌ ${err.message}`;
+    meta.appendChild(errSpan);
   }
 }
 });
