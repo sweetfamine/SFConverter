@@ -61,4 +61,8 @@ See [LICENSE] for details.
 
 ---
 
+This add-on does not collect or transmit any personal data.
+
+---
+
 Made with 🍣 by Copyright (c) 2025 sweet.famine
