@@ -37,9 +37,6 @@ Works in both Chrome and Firefox.
 **Latest Release:**  
 [➡️ SFConverter v1.0](https://github.com/sweetfamine/SFConverter/releases/latest)
 
-- [Download for Chrome](https://github.com/sweetfamine/SFConverter/releases/download/v1.0/SFConverter-1.0-chrome.zip)
-- [Download for Firefox](https://github.com/sweetfamine/SFConverter/releases/download/v1.0/SFConverter-1.0-firefox.zip)
-
 ---
 
 ## 📜 License
