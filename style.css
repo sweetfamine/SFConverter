@@ -206,22 +206,28 @@ footer {
   transform: translateY(-1px);
 }
 
-/* Filename Input */
-.filename-input {
-  width: 100%;
-  max-width: 320px;
-  margin: 6px 0 8px;
-  padding: 8px 10px;
-  border: 1px solid #e8d9e6;
-  border-radius: 10px;
+/* Inline editierbarer Dateiname */
+.file-item .name {
+  font-weight: 600;
   font-size: 0.95rem;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(252, 227, 236, 0.35);
-  outline: none;
-  transition: box-shadow .15s ease, border-color .15s ease;
+  padding: 2px 4px;
+  border-radius: 6px;
+  cursor: text;
 }
 
-.filename-input:focus {
-  border-color: #ff6f61;
-  box-shadow: 0 4px 18px rgba(255, 111, 97, 0.25);
+.file-item .name:focus {
+  outline: none;
+  background: #fff3cd;
+  border: 1px solid #ffa500;
+}
+
+.file-item .name.is-invalid {
+  background: #ffe6e6;
+  border: 1px solid #e57373;
+}
+
+.file-item .ext {
+  color: #666;
+  font-size: 0.9em;
+  margin-left: 2px;
 }

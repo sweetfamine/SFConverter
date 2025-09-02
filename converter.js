@@ -39,7 +39,9 @@ function renderSelectedFiles() {
     const left = document.createElement("div");
     const title = document.createElement("div");
     title.className = "name";
-    title.textContent = file.name;
+    title.textContent = file.name.replace(/\.[^.]+$/, "");
+    title.setAttribute("contenteditable", "true");
+    title.setAttribute("spellcheck", "false");
 
     const meta = document.createElement("div");
     meta.className = "meta";
@@ -49,19 +51,40 @@ function renderSelectedFiles() {
 
     // Eingabefeld für den Dateinamen (vor dem Konvertieren!)
     // Input field for custom base filename (before converting!)
-    const input = document.createElement("input");
-    input.type = "text";
-    input.className = "filename-input";
-    input.placeholder = "optional custom name";
-
     const k = keys[idx];
-    input.value = nameOverrides.get(k) ?? "";
+    const existing = nameOverrides.get(k);
+    if (existing) title.textContent = existing;
 
     // Änderung merken
-    input.addEventListener("input", () => {
-      const v = input.value.trim();
-      if (v) nameOverrides.set(k, v);
-      else nameOverrides.delete(k);
+    title.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        title.blur();
+      } else if (e.key === "Escape") {
+        const base = nameOverrides.get(k) ?? file.name.replace(/\.[^.]+$/, "");
+        title.textContent = base;
+        title.blur();
+      }
+    });
+    title.addEventListener("blur", () => {
+      const raw = (title.textContent || "").trim();
+      const cleaned = raw
+        .replace(/[<>:"/\\|?*\x00-\x1F]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .slice(0, 120);
+      if (cleaned) {
+        if (cleaned === file.name.replace(/\.[^.]+$/, "")) {
+          nameOverrides.delete(k);
+        } else {
+          nameOverrides.set(k, cleaned);
+        }
+        title.textContent = cleaned;
+      } else {
+        const base = file.name.replace(/\.[^.]+$/, "");
+        title.textContent = base;
+        nameOverrides.delete(k);
+      }
     });
 
     // Remove button (X)
@@ -79,7 +102,6 @@ function renderSelectedFiles() {
     });
 
     li.appendChild(left);
-    li.appendChild(input);
     li.appendChild(remove);
     filesList.appendChild(li);
 
@@ -233,46 +255,41 @@ convertBtn.addEventListener("click", async () => {
   resultsList.innerHTML = "";
 
   for (const file of selectedFiles) {
-    
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div class="name">${file.name}</div>
-      <div class="meta">Converting to <strong>${format.toUpperCase()}</strong>…</div>
-    `;
-    resultsList.appendChild(li);
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <div class="name">${file.name}</div>
+    <div class="meta">Converting to <strong>${format.toUpperCase()}</strong>…</div>
+  `;
+  resultsList.appendChild(li);
 
-    try {
-      const { blob, width, height } = await convertFile(file, format, quality);
-      const url = URL.createObjectURL(blob);
+  try {
+    const { blob, width, height } = await convertFile(file, format, quality);
+    const url = URL.createObjectURL(blob);
 
-      // Pro Datei Download Link
-      // per-file Download link
-      const base = file.name.replace(/\.[^.]+$/, "");
+    // Pro Datei Download Link
+    const base = file.name.replace(/\.[^.]+$/, "");
 
-      // Eingabefeld für den Dateinamen
-      // Input field for custom filename
+    // Eingabefeld für den Dateinamen
+    const key = fileKey(file);
+    const entered = (nameOverrides.get(key) || "").trim();
+    const finalBase = entered ? entered : `${base}_SFConverter`;
 
-      // Download-Link
-      const a = document.createElement("a");
-      a.href = url;
+    //new Name
+    li.querySelector(".name").textContent = `${finalBase}.${format}`;
 
-      // Standard: alter Name + _SFConverter
-      const key = fileKey(file);
-      const entered = (nameOverrides.get(key) || "").trim();
-      const finalBase = entered ? entered : `${base}_SFConverter`;
-      a.download = `${finalBase}.${format}`;
-      a.textContent = "⬇ Download";
+    // Download-Link
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${finalBase}.${format}`;
+    a.textContent = "⬇ Download";
 
-      // Falls der Nutzer den Namen ändert → Download-Name aktualisieren
+    const meta = li.querySelector(".meta");
+    meta.textContent = "";
+    li.appendChild(a);
 
-      const meta = li.querySelector(".meta");
-      meta.textContent = "";
-      li.appendChild(a);
-
-    } catch (err) {
-      const meta = li.querySelector(".meta");
-      meta.innerHTML = `<span class="err">❌ ${err.message}</span>`;
-    }
-
+  } catch (err) {
+    const meta = li.querySelector(".meta");
+    meta.innerHTML = `<span class="err">❌ ${err.message}</span>`;
   }
+}
 });
