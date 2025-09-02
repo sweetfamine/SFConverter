@@ -33,6 +33,13 @@ Works in both Chrome and Firefox.
 2. Click **Load Temporary Add-on**
 3. Select the `manifest.json` file from the project folder
 
+## 📦 Download
+**Latest Release:**  
+[➡️ SFConverter v1.0](https://github.com/dein-benutzername/SFConverter/releases/latest)
+
+- [Download for Chrome](https://github.com/dein-benutzername/SFConverter/releases/download/v1.0/SFConverter-1.0-chrome.zip)
+- [Download for Firefox](https://github.com/dein-benutzername/SFConverter/releases/download/v1.0/SFConverter-1.0-firefox.zip)
+
 ---
 
 ## 📜 License
